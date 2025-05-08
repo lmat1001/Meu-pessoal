@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Convite Especial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Pacifico', cursive;
+      background: linear-gradient(to bottom, #ffe0f0, #fff);
+      text-align: center;
+      padding: 50px 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1, h2 {
+      color: #d63384;
+    }
+
+    .botao {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      font-size: 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .botao:hover {
+      background-color: #ff85c1;
+      transform: scale(1.05);
+    }
+
+    #formulario, #mensagemFinal {
+      display: none;
+      margin-top: 30px;
+    }
+
+    select, input[type="date"] {
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin: 10px;
+    }
+
+    #mensagemFinal {
+      font-size: 26px;
+      color: #c2185b;
+      margin-top: 40px;
+      animation: pulse 1.5s infinite;
+    }
+
+    #mensagemFinal img {
+      width: 300px;
+      margin-top: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .heart {
+      position: absolute;
+      top: -50px;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: fall 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(45deg); }
+      100% { transform: translateY(120vh) rotate(45deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Gabriela, quer sair comigo?</h1>
+  <button class="botao" onclick="mostrarFormulario()">SIM</button>
+  <button class="botao" onclick="respostaNao()">NÃO</button>
+
+  <form id="formulario" action="https://formspree.io/f/mzzrgqnw" method="POST">
+    <h2>Quando?</h2>
+    <input type="date" name="data" required>
+
+    <h2>Local:</h2>
+    <select name="local" required>
+      <option value="sair pra comer">Sair pra comer</option>
+      <option value="cinema">Cinema</option>
+      <option value="filminhos na minha casa">Filminhos na minha casa</option>
+      <option value="passeio ao ar livre">Passeio ao ar livre</option>
+    </select><br><br>
+
+    <button type="submit" class="botao">Confirmar</button>
+  </form>
+
+  <div id="mensagemFinal">
+    <p>Encontro marcado, aguardo você meu amorr!</p>
+<img src="https://i.imgur.com/7Gyy7m2.jpeg" alt="">
+  </div>
+
+  <script>
+    function mostrarFormulario() {
+      document.getElementById("formulario").style.display = "block";
+    }
+
+    function respostaNao() {
+      alert("Erro: a opção 'não sair comigo' não existe.");
+    }
+
+    document.getElementById("formulario").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const form = event.target;
+
+      fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          form.style.display = "none";
+          document.getElementById("mensagemFinal").style.display = "block";
+        } else {
+          alert("Ocorreu um erro ao enviar. Tente novamente.");
+        }
+      });
+    });
+
+    function criarCoracoes() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(criarCoracoes, 300);
+  </script>
+
+</body>
+</html>

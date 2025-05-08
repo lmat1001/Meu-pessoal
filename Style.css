@@ -1,0 +1,58 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+h1 {
+    color: #FF69B4;
+}
+
+#matematica, #completo {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin: 10px;
+}
+
+button {
+    background-color: #FF69B4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #FF1493;
+}
+
+select, input[type="text"], input[type="date"] {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px;
+    width: 80%;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#mensagem-erro {
+    color: red;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+#titulo1, #titulo2 {
+    color: #FF69B4;
+}
